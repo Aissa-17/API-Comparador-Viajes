@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Comparador de Viajes</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header__brand">
+        <span class="header__logo">🧭</span>
+        <div>
+          <h1 class="header__title">API Comparador de Viajes</h1>
+          <p class="header__subtitle">Prueba tu API de forma visual y rápida</p>
+        </div>
+      </div>
+      <div class="header__status">
+        <span class="status-dot"></span>
+        <span class="status-text">Servidor: pendiente</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Panel izquierdo: formulario -->
+      <section class="panel panel--left">
+        <h2 class="panel__title">Configurar búsqueda</h2>
+        <form id="trip-form" class="form">
+          <div class="form__group">
+            <label for="origin" class="form__label">Origen</label>
+            <input
+              type="text"
+              id="origin"
+              name="origin"
+              class="form__input"
+              placeholder="Madrid, Barcelona, etc."
+            />
+          </div>
+
+          <div class="form__group">
+            <label for="destination" class="form__label">Destino</label>
+            <input
+              type="text"
+              id="destination"
+              name="destination"
+              class="form__input"
+              placeholder="París, Roma, Londres..."
+            />
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div>
+              <label for="budget" class="form__label">Presupuesto máximo (€)</label>
+              <input
+                type="number"
+                id="budget"
+                name="budget"
+                class="form__input"
+                min="0"
+                placeholder="300"
+              />
+            </div>
+            <div>
+              <label for="days" class="form__label">Duración (días)</label>
+              <input
+                type="number"
+                id="days"
+                name="days"
+                class="form__input"
+                min="1"
+                placeholder="5"
+              />
+            </div>
+          </div>
+
+          <div class="form__group form__group--inline">
+            <div>
+              <label for="startDate" class="form__label">Desde</label>
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                class="form__input"
+              />
+            </div>
+            <div>
+              <label for="endDate" class="form__label">Hasta</label>
+              <input
+                type="date"
+                id="endDate"
+                name="endDate"
+                class="form__input"
+              />
+            </div>
+          </div>
+
+          <div class="form__group">
+            <label for="sort" class="form__label">Ordenar por</label>
+            <select id="sort" name="sort" class="form__input">
+              <option value="price">Precio</option>
+              <option value="duration">Duración</option>
+              <option value="rating">Valoración</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn--primary">
+            Buscar viajes
+          </button>
+
+          <p class="form__hint">
+            Este formulario llamará a tu endpoint
+            <code>/api/v1/trips/match</code> (o el que definas) desde
+            <code>script.js</code>.
+          </p>
+        </form>
+      </section>
+
+      <!-- Panel derecho: resultados / respuesta API -->
+      <section class="panel panel--right">
+        <div class="panel__header">
+          <h2 class="panel__title">Respuesta de la API</h2>
+          <button type="button" class="btn btn--ghost" id="btn-mock">
+            Cargar datos de ejemplo
+          </button>
+        </div>
+
+        <div class="response">
+          <div class="response__meta">
+            <span class="badge badge--method">GET / POST</span>
+            <span class="badge badge--endpoint">/api/v1/trips/match</span>
+          </div>
+
+          <pre class="response__body" id="response-output">
+{ 
+  "message": "Aquí verás la respuesta de tu API.",
+  "hint": "Implementa la lógica en public/js/script.js"
+}
+          </pre>
+        </div>
+
+        <section class="results" id="results-list">
+          <!-- Aquí puedes renderizar tarjetas con resultados de viajes desde JS -->
+          <p class="results__empty">
+            Aún no hay resultados. Lanza una búsqueda para mostrar los viajes
+            recomendados.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__text">
+        API Comparador de Viajes · Proyecto Node.js + TypeScript
+      </p>
+    </footer>
+  </div>
+
+  <script src="./js/script.js" defer></script>
+</body>
+</html>
