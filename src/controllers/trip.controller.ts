@@ -19,7 +19,7 @@ export const crearTrip = (req: Request, res: Response) => {
         duration,
         adventureLevel,
         price,
-        notes?
+        notes
     };
 
     trips.push(nuevoTrip);
