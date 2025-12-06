@@ -27,21 +27,20 @@ btnMock.addEventListener("click", async () => {
   try {
      // Crear usuario de prueba
      const userBody = {
-      name: "Test User",
-      email: "testuser@example.com",
+      name: "Usuario Demo",
+      email: "demo@example.com",
       country: "España",
-      interest: ["playa", "montaña"],
+      interests: ["playa", "montaña"],
       budget: 300,
-      adventureLevel: "Intermediate"
+      adventureLevel: "Intermediate",
     };
 
-    const userResponse = await fetch("/api/users", {  
+    const userRes = await fetch("/api/users", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(userBody)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userBody),
     });
+
 
     if (!userResponse.ok) {
       throw new Error("Failed to create test user");

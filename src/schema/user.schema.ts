@@ -1,7 +1,7 @@
 import {z} from 'zod';
 
 export const userSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string().uuid().optional(),
     name: z.string().min(1, "Name cannot be empty"),
     email: z.string().email("Invalid email address"),   
     country: z.string().min(1, "Country cannot be empty"),
