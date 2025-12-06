@@ -4,6 +4,5 @@ import {userMiddleware} from '../middlewares/user.middleares';
 import {userSchema} from '../schema/user.schema';
 
 export const userRoute = Router();
-
-userRoute.post("/", obtenerUsuarios);
+userRoute.get("/", obtenerUsuarios);
 userRoute.post("/", userMiddleware(userSchema), crearUsuario);

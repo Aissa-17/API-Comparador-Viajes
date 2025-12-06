@@ -5,5 +5,5 @@ import {tripSchema} from '../schema/trip.schema';
 
 export const tripRoute = Router();
 
-tripRoute.post("/", obtenerTrips);
+tripRoute.get("/", obtenerTrips);
 tripRoute.post("/", tripMiddleware(tripSchema), crearTrip);
