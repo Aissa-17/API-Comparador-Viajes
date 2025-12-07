@@ -1,3 +1,4 @@
+// Modelo trip
 export interface Trip {
     id: string;
     creatorID: string;

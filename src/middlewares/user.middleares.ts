@@ -2,12 +2,17 @@ import {Request, Response, NextFunction} from 'express';
 import {ZodSchema} from 'zod';
 
 export const userMiddleware = (schema: ZodSchema) => {
-    return (req: Request, res: Response, next: NextFunction) => {
-        try {   
-            schema.parse(req.body);
-            next();
-        } catch (error) {
-            return res.status(400).json({error: (error as Error).message});
-        }  
-    };
-};  
+  return (req: Request, res: Response, next: NextFunction) => {
+    try {
+      schema.parse(req.body);
+      next();
+    } catch (error: any) {
+      console.error("Validation error (user):", error);
+      return res.status(400).json({
+        message: "Validation error",
+        errors: error.errors ?? error.message,
+        body: req.body,
+      });
+    }
+  };
+};

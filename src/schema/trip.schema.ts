@@ -1,7 +1,7 @@
 import {z} from 'zod';
 
 export const tripSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string().uuid().optional(),
     creatorID: z.string().uuid(),
     title: z.string().min(1, "Title cannot be empty"),
     country: z.string().min(1, "Country cannot be empty"),

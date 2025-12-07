@@ -42,14 +42,14 @@ btnMock.addEventListener("click", async () => {
     });
 
 
-    if (!userResponse.ok) {
+    if (!userRes.ok) {
       throw new Error("Failed to create test user");
     }
-    const user = await userResponse.json();
+    const user = await userRes.json();
 
     // Crear trip de prueba
     const tripBody = {
-       creatorID: user.id,
+      creatorID: user.id,
       title: "Viaje Demo",
       country: "Suiza",
       cities: ["Zúrich", "Interlaken"],
@@ -79,7 +79,7 @@ btnMock.addEventListener("click", async () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ userID: user.id, tripID: trip.id })
+      body: JSON.stringify({ userId: user.id, tripId: trip.id })
     });
     if (!matchResponse.ok) {
       throw new Error("Failed to match user and trip");
