@@ -10,11 +10,11 @@ async function checkServerStatus() {
     if (response.ok) {
       estadoServer.classList.add("online");
       estadoServer.classList.remove("offline");
-      textoEstado.textContent = "Server is Online";
+      textoEstado.textContent = "Server Online";
     } else {
       estadoServer.classList.add("offline");
       estadoServer.classList.remove("online");
-      textoEstado.textContent = "Server is Offline";
+      textoEstado.textContent = "Server Offline";
     }      
   } catch (error) {
     console.error("Error checking server status:", error);
