@@ -1,13 +1,13 @@
 import {Request, Response} from 'express';
-import {users} from '../data/user.data';
-import {trips} from '../data/trip.data';
+import {TripModel} from '../models/trip.model';
+import {UserModel} from '../models/user.model';
 import {calculatorMatch} from '../utils/match';
 
-export const matchUserTrip = (req: Request, res: Response) => {
+export const matchUserTrip = async (req: Request, res: Response) => {
     const {userId, tripId} = req.body;
 
-    const user = users.find(u=>u.id === userId);
-    const trip = trips.find(f=>f.id === tripId);
+    const user = await UserModel.findById(userId);
+    const trip = await TripModel.findById(tripId);
 
     if(!user || !trip){
         return res.status(404).json({message: "Usuario o viaje no encontrado"});

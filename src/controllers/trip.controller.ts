@@ -1,27 +1,17 @@
 import {Request, Response} from 'express';
-import {trips} from '../data/trip.data';
-import {Trip} from '../models/trip.model'
-import {randomUUID} from 'crypto';
+import {TripModel} from '../models/trip.model';
 
-export const obtenerTrips = (req: Request, res: Response) => {
+export const obtenerTrips = async (req: Request, res: Response) => {
+    const trips = await TripModel.find();
     res.json(trips);
 };
 
-export const crearTrip = (req: Request, res: Response) => {
-    const { creatorID, title, country, cities, duration, adventureLevel, price, notes } = req.body;
-
-    const nuevoTrip: Trip = {
-        id: randomUUID(),
-        creatorID,
-        title,
-        country,
-        cities,
-        duration,
-        adventureLevel,
-        price,
-        notes
-    };
-
-    trips.push(nuevoTrip);
-    res.status(201).json(nuevoTrip);
+export const crearTrip = async (req: Request, res: Response) => {
+    try {
+        const nuevoTrip = new TripModel(req.body);
+        await nuevoTrip.save();
+        res.status(201).json(nuevoTrip);
+    } catch (error) {
+        res.status(400).json({ message: 'Error al crear el trip', error });
+    }
 };

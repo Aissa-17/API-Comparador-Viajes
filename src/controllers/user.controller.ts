@@ -1,25 +1,17 @@
 import { Request, Response } from 'express';
-import { users } from '../data/user.data';
-import { User } from '../models/user.model';
-import { randomUUID } from 'crypto';
+import { UserModel } from '../models/user.model';
 
-export const obtenerUsuarios = (req: Request, res: Response) => {
-  res.json(users);
+export const obtenerUsuarios = async (req: Request, res: Response) => {
+  const usuarios = await UserModel.find();
+  res.json(usuarios);
 };
 
-export const crearUsuario = (req: Request, res: Response) => {
-  const { name, email, country, interests, budget, adventureLevel } = req.body;
-
-  const nuevoUsuario: User = {
-    id: randomUUID(),
-    name,
-    email,
-    country,
-    interests,
-    budget,
-    adventureLevel,
-  };
-
-  users.push(nuevoUsuario);
-  res.status(201).json(nuevoUsuario);
+export const crearUsuario = async (req: Request, res: Response) => {
+  try {
+    const nuevoUsuario = new UserModel(req.body);
+    await nuevoUsuario.save();
+    res.status(201).json(nuevoUsuario);
+  }catch (error) {
+    res.status(500).json({ message: 'Error al crear el usuario', error });
+  }
 };

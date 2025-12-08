@@ -4,7 +4,9 @@ import { fileURLToPath } from 'url';
 import {matchRoute} from './routes/match.route';
 import {tripRoute} from './routes/trip.route';
 import {userRoute} from './routes/user.route';
+import {connectDB} from './database/mongo';
 
+connectDB();
 const app = express();
 app.use(express.json());
 
