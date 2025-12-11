@@ -1,6 +1,6 @@
 # API-Comparador-Viajes
 
-API REST en Node.js y TypeScript para gestionar usuarios, rutas de viaje y calcular la compatibilidad entre ambos mediante un algoritmo propio. Los datos se almacenan temporalmente en arrays, dejando el proyecto preparado para futuras integraciones con MongoDB.
+API REST en Node.js y TypeScript para gestionar usuarios, rutas de viaje y calcular la compatibilidad entre ambos mediante un algoritmo propio. Los datos se almacenan usando el gestor de base de datos NoSQL MongoDB.
 
 Características
   CRUD de usuarios
