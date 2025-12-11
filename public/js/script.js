@@ -22,13 +22,13 @@ async function checkServerStatus() {
 }
 
 // Segundo crear el usuario de prueba, el trip de prueba y hacer match
-
 btnMock.addEventListener("click", async () => {
   try {
-     // Crear usuario de prueba
-     const userBody = {
-      name: "Usuario Demo",
-      email: "demo@example.com",
+    const timestamp = Date.now();
+
+    const userBody = {
+      name: `Usuario Demo ${timestamp}`,
+      email: `demo+${timestamp}@example.com`,
       country: "España",
       interests: ["playa", "montaña"],
       budget: 300,
@@ -49,7 +49,7 @@ btnMock.addEventListener("click", async () => {
 
     // Crear trip de prueba
     const tripBody = {
-      creatorID: user.id,
+      creatorID: user._id,        
       title: "Viaje Demo",
       country: "Suiza",
       cities: ["Zúrich", "Interlaken"],
@@ -58,6 +58,7 @@ btnMock.addEventListener("click", async () => {
       price: 320,
       notes: "Viaje de prueba para el matcher",
     };
+
 
     const tripResponse = await fetch("/api/trips", {
       method: "POST",
@@ -72,14 +73,14 @@ btnMock.addEventListener("click", async () => {
     }
     const trip = await tripResponse.json();
 
-    //Hacemos match
+    // Hacemos match
     const matchResponse = await fetch(`/api/matchs`, {
       method: "POST",
-
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ userId: user.id, tripId: trip.id })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        userId: user._id,    // 👈 _id
+        tripId: trip._id     // 👈 _id
+      }),
     });
     if (!matchResponse.ok) {
       throw new Error("Failed to match user and trip");
